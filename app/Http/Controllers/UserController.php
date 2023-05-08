@@ -17,9 +17,54 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+        /**
+     *
+     *  @OA\Get(path="/api/list/users",
+     *     tags={"Usuarios"},
+     *     security={
+     *          {"token": {}},
+     *     },
+     *     description="Lista de usuarios",
+     *     summary="Lista de usuarios",
+     *     operationId="listarUsuarios",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Lista de documentos de las apis",
+     *         @OA\JsonContent(
+     *              @OA\Property(property ="resultado",type="string",description="Estado de resultado"),
+     *              @OA\Property(property="datos",description="Datos del resultado de la api",type="string"),
+     *              @OA\Property(property ="entregado",type="string",description="Fecha hora de entrega"),
+     *              @OA\Property(property ="consumo",type="number",description="Cant. recursos consumidos"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Recurso no encontrado. La petición no devuelve ningún dato",
+     *     ),
+     *     @OA\Response(
+     *         response="403",
+     *         description="Acceso denegado. No se cuenta con los privilegios suficientes",
+     *         @OA\JsonContent(
+     *              @OA\Property(property ="error",type="string",description="Error")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Error de Servidor.",
+     *         @OA\JsonContent(
+     *              @OA\Property(property ="error",type="string",description="Error de Servidor")
+     *         )
+     *     ),
+     * )
+     *
+     */
     public function index()
     {
-        //
+        $user = User::all();
+
+        return response()->json(['user' => $user]);
     }
 
     /**
@@ -89,23 +134,14 @@ class UserController extends Controller
     }
 
 
-    
+
     /**
      *
-     *  @OA\Post(path="/api/admin/register",
+     *  @OA\Post(path="/api/register",
      *     tags={"Usuarios"},
      *     description="Registrar usuario",
      *     summary="Registrar usuario Admin",
      *     operationId="AdminRegister",
-     *     @OA\Parameter(
-     *         name="Admin",
-     *      in="header",
-     *      required=true,
-     *          description="Admin identifier",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Se ha iniciado sesión conrrectamente",
@@ -213,22 +249,13 @@ class UserController extends Controller
         }
     }
 
-      /**
+    /**
      *
-     *  @OA\Post(path="/api/admin/login",
+     *  @OA\Post(path="/api/login",
      *     tags={"Autenticar"},
      *     description="Permite autenticarse y devuelve jwt token para autorizar acceso a endpoints protegidos.",
      *     summary="Autenticar usuario Admin",
      *     operationId="autenticar_update",
-     *  @OA\Parameter(
-     *         name="Admin",
-     *      in="header",
-     *      required=true,
-     *          description="Admin identifier",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Se ha iniciado sesión conrrectamente",

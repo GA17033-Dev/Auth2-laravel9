@@ -29,9 +29,13 @@ Route::middleware('token_client', 'CheckClientTokenAccess', 'client')->get('/tes
     return response()->json(['foo' => 'bar']);
 });
 
+Route::post('/register', [UserController::class, 'register']);
 
-Route::middleware('user')->prefix('/admin')->group(function () {
-    Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+/**
+ * Todo: Listar usuarios con el middleware auth:api
+ */
+Route::get('/list/users', [UserController::class, 'index'])->middleware('auth:api');
 
-    Route::post('/login', [UserController::class, 'login']);
-});
+// Route::middleware('user')->prefix('/admin')->group(function () {
+// });

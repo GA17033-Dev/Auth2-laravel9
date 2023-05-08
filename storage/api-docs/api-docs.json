@@ -6,7 +6,87 @@
         "version": "1.0"
     },
     "paths": {
-        "/api/admin/register": {
+        "/api/list/users": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Lista de usuarios",
+                "description": "Lista de usuarios",
+                "operationId": "listarUsuarios",
+                "responses": {
+                    "200": {
+                        "description": "Lista de documentos de las apis",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "resultado": {
+                                            "description": "Estado de resultado",
+                                            "type": "string"
+                                        },
+                                        "datos": {
+                                            "description": "Datos del resultado de la api",
+                                            "type": "string"
+                                        },
+                                        "entregado": {
+                                            "description": "Fecha hora de entrega",
+                                            "type": "string"
+                                        },
+                                        "consumo": {
+                                            "description": "Cant. recursos consumidos",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado. La petición no devuelve ningún dato"
+                    },
+                    "403": {
+                        "description": "Acceso denegado. No se cuenta con los privilegios suficientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error de Servidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error de Servidor",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
             "post": {
                 "tags": [
                     "Usuarios"
@@ -14,17 +94,6 @@
                 "summary": "Registrar usuario Admin",
                 "description": "Registrar usuario",
                 "operationId": "AdminRegister",
-                "parameters": [
-                    {
-                        "name": "Admin",
-                        "in": "header",
-                        "description": "Admin identifier",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "description": "Datos de usuario para registro",
                     "required": true,
@@ -130,7 +199,7 @@
                 }
             }
         },
-        "/api/admin/login": {
+        "/api/login": {
             "post": {
                 "tags": [
                     "Autenticar"
@@ -138,17 +207,6 @@
                 "summary": "Autenticar usuario Admin",
                 "description": "Permite autenticarse y devuelve jwt token para autorizar acceso a endpoints protegidos.",
                 "operationId": "autenticar_update",
-                "parameters": [
-                    {
-                        "name": "Admin",
-                        "in": "header",
-                        "description": "Admin identifier",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "requestBody": {
                     "description": "Credenciales de ingreso",
                     "required": true,
