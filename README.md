@@ -33,8 +33,11 @@ Luego debemos hacer una migracion de las respectivas tablas para hacer uso de Au
 
 
 Para el manejo de Auth2 es necesario tener dos archivo oauth-private.key y oauth-public.key  para generarlos hacer lo siguiente:
+
 **php artisan passport:install**, este comando creara las dos llaves que necesitamos para generar token de acceso si no hemos echo la migracion con el comando php artisan migrate las creara automaticamente, Tambien podemos hacer uso del siguiente comando 
-**php artisan passport:install --uuids** este comando tiene la misma funcion de crear las llaves y realizar la migracion, pero las tablas de que trae por defecto Auth2 el id de cada tabla sera tipo char de 36 caracteres
+
+**php artisan passport:install --uuids**
+este comando tiene la misma funcion de crear las llaves y realizar la migracion, pero las tablas de que trae por defecto Auth2 el id de cada tabla sera tipo char de 36 caracteres
 Luego un:
 **php artisan passport:install**
 
