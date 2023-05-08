@@ -1,4 +1,4 @@
-## Plantilla Backend con Laravel-Lumen (Con autenticación JWT)
+## Plantilla Backend con Laravel 9 (Con autenticación Auth2)
 -----------
 
 
