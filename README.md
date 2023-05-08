@@ -2,7 +2,7 @@
 -----------
 
 
-![jwt-auth-banner](https://cloud.githubusercontent.com/assets/1801923/9915273/119b9350-5cae-11e5-850b-c941cac60b32.png)
+![jwt-auth-banner](https://github.com/laravel/passport/blob/11.x/art/logo.svg)
 -----------
 ### Tabla de Contenido
 
@@ -10,11 +10,6 @@
 
 [Consideraciones Previas](#consideraciones-previas)
 
-[Colaboradores](#colaboradores)
-
-[Enlaces de Ayuda](#enlaces-ayuda)
-
-[Licencia](#licencia)
 
 -----------
 
