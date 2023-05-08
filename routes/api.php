@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,11 @@ Route::post('/token/client', [AccessTokenController::class, 'issueToken'])->midd
  */
 Route::middleware('token_client', 'CheckClientTokenAccess', 'client')->get('/test', function () {
     return response()->json(['foo' => 'bar']);
+});
+
+
+Route::middleware('user')->prefix('/admin')->group(function () {
+    Route::post('/register', [UserController::class, 'register']);
+
+    Route::post('/login', [UserController::class, 'login']);
 });

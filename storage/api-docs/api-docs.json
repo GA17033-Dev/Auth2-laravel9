@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Black List",
+        "description": "Backend Documentación",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/admin/register": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Registrar usuario Admin",
+                "description": "Registrar usuario",
+                "operationId": "AdminRegister",
+                "parameters": [
+                    {
+                        "name": "Admin",
+                        "in": "header",
+                        "description": "Admin identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos de usuario para registro",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre de usuario",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Correo de usuario",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Cláve de ingreso al sistema",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se ha iniciado sesión conrrectamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "description": "Bearer token",
+                                            "type": "string"
+                                        },
+                                        "token_type": {
+                                            "description": "Token type",
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "description": "Datos del usuario",
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Id usuario",
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "expires_in": {
+                                            "description": "Duración token",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado. La petición no devuelve ningún dato"
+                    },
+                    "403": {
+                        "description": "Acceso denegado. No se cuenta con los privilegios suficientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensaje de error de privilegios insuficientes",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error de Servidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error de Servidor",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/login": {
+            "post": {
+                "tags": [
+                    "Autenticar"
+                ],
+                "summary": "Autenticar usuario Admin",
+                "description": "Permite autenticarse y devuelve jwt token para autorizar acceso a endpoints protegidos.",
+                "operationId": "autenticar_update",
+                "parameters": [
+                    {
+                        "name": "Admin",
+                        "in": "header",
+                        "description": "Admin identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Credenciales de ingreso",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "usuario",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Número de teléfono",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Cláve de ingreso al sistema",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se ha iniciado sesión conrrectamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado. La petición no devuelve ningún dato"
+                    },
+                    "403": {
+                        "description": "Acceso denegado. No se cuenta con los privilegios suficientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensaje de error de privilegios insuficientes",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error de Servidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error de Servidor",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "token": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

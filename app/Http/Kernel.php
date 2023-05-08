@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 use App\Http\Middleware\CheckClientToken;
 use App\Http\Middleware\CheckClientTokenAccess;
+use App\Http\Middleware\VerifyUserAdmin;
 
 class Kernel extends HttpKernel
 {
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'client' => CheckClientCredentials::class,
         'token_client' => CheckClientToken::class,
         'CheckClientTokenAccess' => CheckClientTokenAccess::class,
+        'user' => VerifyUserAdmin::class,
     ];
 }
