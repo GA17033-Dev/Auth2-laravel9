@@ -62,7 +62,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::with('roles')->get();
+        if ($user->isEmpty()) {
+            return response()->json(['error' => 'No se encontraron usuarios'], 404);
+        }
 
         return response()->json(['user' => $user]);
     }
@@ -241,6 +244,10 @@ class UserController extends Controller
             $user->email = strtolower($request->email);
             $user->password = Hash::make($request->password);
             $user->save();
+
+            // Asignar rol al usuario rol usuario
+            $user->assignRole('usuario');
+            // Asignar permisos al usuario
             // if ($user->save()) {
             $token = $user->createToken('API Token')->accessToken;
             return response()->json(['token' => $token, 'user' => $user], 200);

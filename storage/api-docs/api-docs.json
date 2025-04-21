@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Black List",
+        "title": "API Plantilla",
         "description": "Backend Documentación",
         "version": "1.0"
     },
@@ -290,5 +290,15 @@
                 "in": "header"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "Usuarios"
+        },
+        {
+            "name": "Autenticar",
+            "description": "Autenticar"
+        }
+    ]
 }
